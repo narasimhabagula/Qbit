@@ -333,7 +333,7 @@ export const INITIAL_BADGES: Badge[] = [
   {
     id: 'quantum-master',
     name: 'Quantum Master',
-    description: 'Reached Level 8 and completed all SIH26140 algorithm modules.',
+    description: 'Reached Level 8 and completed all advanced quantum algorithm modules.',
     icon: '🌌',
     isUnlocked: false,
   },

@@ -48,7 +48,7 @@ const MOCK_GOOGLE_ACCOUNTS = [
   },
   {
     name: 'Narasimha Developer',
-    email: 'narasimha.sih@gmail.com',
+    email: 'narasimha.dev@gmail.com',
     avatar: '⚡',
   },
 ];
@@ -426,7 +426,7 @@ export const AuthModal: React.FC = () => {
 
         {/* Footer info banner */}
         <div className="px-6 py-2.5 bg-slate-50 border-t border-slate-100 text-center text-[10px] text-slate-400 font-medium">
-          Smart India Hackathon SIH26140 • Unpaired Electrons
+          QBIT Quantum Computing Platform • Secure Authentication
         </div>
       </motion.div>
 

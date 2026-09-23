@@ -1,8 +1,6 @@
 """
-QBIT - AI-Powered Gamified Quantum Computing Platform
+QBIT - AI-Powered Interactive Quantum Computing Platform
 Backend Engine (FastAPI)
-Team: UNPAIRED ELECTRONS
-Problem Statement: SIH26140
 """
 
 import math
@@ -15,7 +13,7 @@ import numpy as np
 
 app = FastAPI(
     title="QBIT Quantum Simulation & AI Engine",
-    description="Backend API for QBIT - Gamified Quantum Computing Platform (SIH26140)",
+    description="Backend API for QBIT - Quantum Computing Platform",
     version="1.0.0"
 )
 
@@ -85,8 +83,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "QBIT Quantum Engine",
-        "team": "UNPAIRED ELECTRONS",
-        "problem_statement": "SIH26140",
+        "platform": "QBIT Quantum Computing Platform",
         "supported_frameworks": ["Qiskit", "Cirq", "PennyLane", "OpenQASM"],
         "max_simulated_qubits": 8
     }
@@ -270,9 +267,9 @@ def tutor_chat(req: TutorChatRequest):
         tip = "Practice makes permanent: Try the 3-minute gate drill in the Practice Hub."
         actions = ["Start 3-min drill", "Explain gate matrix", "Reset circuit"]
     else:
-        reply = "I'm QBIT AI, your personal quantum guide! 🤖 Whether you want to master superposition, build a Bell state circuit, write Qiskit code, or prepare for the SIH26140 hackathon, I'm here to coach you step-by-step. What would you like to explore?"
+        reply = "I'm QBIT AI, your personal quantum guide! 🤖 Whether you want to master superposition, build a Bell state circuit, analyze quantum algorithms, or write Qiskit code, I'm here to coach you step-by-step. What would you like to explore?"
         tip = "Try asking: 'How does a CNOT gate work?' or 'What happens when I apply Hadamard?'"
-        actions = ["What is a Qubit?", "Explore Quantum Playground", "Take Daily Challenge"]
+        actions = ["What is a Qubit?", "Explore Quantum Playground", "Take Quantum Challenge"]
         
     return TutorChatResponse(reply=reply, suggested_actions=actions, quantum_tip=tip)
 

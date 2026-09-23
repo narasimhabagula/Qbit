@@ -6,12 +6,10 @@
 
 ---
 
-## 🏆 Smart India Hackathon Details
-- **Problem Statement ID**: `SIH26140`
-- **Problem Title**: AI-Based Interactive Quantum Algorithm Learning Platform
-- **Theme**: Smart Education
-- **Category**: Software
-- **Team Name**: **UNPAIRED ELECTRONS**
+## 🌐 Platform Architecture
+- **Platform Name**: **QBIT**
+- **Domain**: Quantum Computing Simulation & Education
+- **Category**: Interactive EdTech & Quantum Simulation
 - **AI Tutor Inside**: **QBIT AI** (Your Personal Quantum Tutor)
 
 ---
@@ -64,7 +62,7 @@
 - **Mastery Analytics**: Topic breakdown across Foundations (85%), Circuits (65%), Algorithms (35%), and weekly XP velocity chart.
 - **Leaderboard**: Weekly League, Global Standings, and Friends leaderboards.
 
-### 7. 👨‍🏫 Instructor & Educator Console (SIH Architecture)
+### 7. 👨‍🏫 Instructor & Educator Console
 - Student roster tracking with curriculum completion percentages.
 - Automated class misconception diagnostics (e.g., detecting students measuring before entangling).
 - One-click assignment dispatcher for targeted remedial modules.

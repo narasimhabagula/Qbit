@@ -4,12 +4,10 @@ import {
   Flame, 
   Star, 
   Heart, 
-  Trophy, 
   Volume2, 
   VolumeX, 
   Atom, 
   LogOut,
-  Sparkles,
   Bot
 } from 'lucide-react';
 
@@ -25,18 +23,9 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-slate-950/90 border-b border-slate-800/80 backdrop-blur-xl select-none transition-all">
-      {/* Subtle Top SIH Announcement Bar */}
-      <div className="bg-slate-900/90 text-slate-300 text-[10px] sm:text-[11px] py-1 px-4 text-center border-b border-slate-800/60 flex items-center justify-center gap-2 flex-wrap font-mono tracking-wider">
-        <span className="text-cyan-400 font-bold">SMART INDIA HACKATHON 2026</span>
-        <span className="text-slate-500">•</span>
-        <span className="text-slate-400">SIH26140</span>
-        <span className="text-slate-500">•</span>
-        <span className="text-indigo-300 font-semibold">TEAM UNPAIRED ELECTRONS</span>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-2.5 flex items-center justify-between gap-4">
-        {/* Brand Logo */}
+    <header className="sticky top-0 z-40 w-full bg-slate-950/80 border-b border-slate-800/60 backdrop-blur-xl select-none transition-all">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3 flex items-center justify-between gap-4">
+        {/* Left: Brand Logo & Subtitle */}
         <div 
           onClick={() => actions.setView('landing')}
           className="flex items-center gap-3 cursor-pointer group"
@@ -51,17 +40,14 @@ export const Navbar: React.FC = () => {
               <span className="font-black text-xl tracking-tight text-white">
                 QBIT
               </span>
-              <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800/60 uppercase">
-                v2.0
-              </span>
             </div>
             <span className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase block">
-              Quantum Learning Platform
+              Quantum Computing Platform
             </span>
           </div>
         </div>
 
-        {/* Desktop Navigation Links */}
+        {/* Center: Navigation Links */}
         <nav className="hidden md:flex items-center gap-1 lg:gap-2">
           {navItems.map((item) => {
             const isActive = item.view && store.currentView === item.view;
@@ -84,7 +70,7 @@ export const Navbar: React.FC = () => {
           })}
         </nav>
 
-        {/* Gamification Stats Bar */}
+        {/* Gamification Stats Bar (when in learning views) */}
         {store.currentView !== 'landing' && (
           <div className="hidden lg:flex items-center gap-3 font-mono">
             {/* Streak */}
@@ -105,7 +91,7 @@ export const Navbar: React.FC = () => {
               <span>{store.xp} XP</span>
             </div>
 
-            {/* Lives */}
+            {/* Lives / Coherence */}
             <div 
               onClick={() => actions.recoverLives()}
               className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-rose-500/30 text-rose-300 text-xs font-bold cursor-pointer hover:bg-rose-950/40"
@@ -117,7 +103,7 @@ export const Navbar: React.FC = () => {
           </div>
         )}
 
-        {/* Right Controls */}
+        {/* Right: Sound Toggle & Auth Controls */}
         <div className="flex items-center gap-2.5">
           {/* Sound Toggle */}
           <button
@@ -152,13 +138,13 @@ export const Navbar: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => actions.openAuth('login')}
-                className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 border border-slate-700 uppercase tracking-wider transition-all cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 border border-slate-800 hover:border-slate-600 transition-all uppercase tracking-wider cursor-pointer"
               >
                 Log In
               </button>
               <button
                 onClick={() => actions.openAuth('signup')}
-                className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md hover:shadow-cyan-500/25 transition-all cursor-pointer"
+                className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md hover:shadow-cyan-500/20 transition-all cursor-pointer"
               >
                 Get Started
               </button>

@@ -24,12 +24,12 @@ import {
   Compass,
   BookOpen,
   Sliders,
-  Share2,
   Atom,
-  ShieldCheck,
   ChevronRight,
   ExternalLink,
-  HelpCircle
+  HelpCircle,
+  BarChart3,
+  Waves
 } from 'lucide-react';
 
 interface AlgorithmCard {
@@ -38,88 +38,91 @@ interface AlgorithmCard {
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   difficultyColor: string;
   concept: string;
+  description: string;
   speedup: string;
   circuitSnippet: string;
-  qubits: number;
 }
 
 const ALGORITHMS: AlgorithmCard[] = [
   {
     id: 'deutsch-jozsa',
-    name: 'Deutsch-Jozsa',
+    name: 'Deutsch-Jozsa Algorithm',
     difficulty: 'Beginner',
     difficultyColor: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
-    concept: 'Determines whether a black-box oracle function is constant or balanced using exactly 1 quantum query.',
-    speedup: 'Exponential: 1 query vs 2ⁿ⁻¹ + 1 classical',
-    circuitSnippet: '|0⟩─H─[ Uf ]─H─M\n|1⟩─H─[ Uf ]───',
-    qubits: 2,
+    concept: 'Constant vs Balanced Function Determination',
+    description: 'Determines whether an unknown oracle function is constant or balanced using exactly 1 quantum query instead of 2ⁿ⁻¹ + 1 classical queries.',
+    speedup: 'Exponential Speedup: 1 query vs 2ⁿ⁻¹ + 1',
+    circuitSnippet: '|0⟩ ─── H ─── [ Uf ] ─── H ─── M\n|1⟩ ─── H ─── [ Uf ] ───────────',
   },
   {
     id: 'bernstein-vazirani',
-    name: 'Bernstein-Vazirani',
+    name: 'Bernstein-Vazirani Algorithm',
     difficulty: 'Beginner',
     difficultyColor: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
-    concept: 'Finds an unknown n-bit secret string s with 100% certainty in a single query.',
-    speedup: 'Linear speedup: 1 query vs n classical queries',
-    circuitSnippet: '|0⟩ⁿ─Hⁿ─[ U_s ]─Hⁿ─Mⁿ\n|1⟩───H──[ U_s ]────',
-    qubits: 3,
+    concept: 'Hidden Bitstring Recovery',
+    description: 'Finds an unknown n-bit secret string with 100% deterministic certainty in a single quantum query.',
+    speedup: 'Linear Advantage: 1 query vs n queries',
+    circuitSnippet: '|0⟩ⁿ ── Hⁿ ── [ Us ] ── Hⁿ ── Mⁿ\n|1⟩  ── H  ── [ Us ] ───────────',
   },
   {
     id: 'teleportation',
     name: 'Quantum Teleportation',
     difficulty: 'Intermediate',
     difficultyColor: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10',
-    concept: 'Transfers an unknown quantum state |ψ⟩ between distant nodes via entanglement and 2 classical bits.',
+    concept: 'Quantum State Transmission via Entanglement',
+    description: 'Transfers an arbitrary quantum state between nodes without physical transmission of the qubit itself, utilizing a Bell pair and classical bits.',
     speedup: 'State transfer adhering to No-Cloning theorem',
-    circuitSnippet: '|ψ⟩───●──H──M \n|0⟩─H─┼─────┼─X─\n|0⟩───X─────M──Z─',
-    qubits: 3,
+    circuitSnippet: '|ψ⟩ ─── ● ── H ── M ──────\n|0⟩ ─H─ ┼ ─────── ┼ ─ X ─\n|0⟩ ─── X ─────── M ─── Z ─',
   },
   {
     id: 'grover',
-    name: "Grover's Search",
+    name: "Grover's Algorithm",
     difficulty: 'Intermediate',
     difficultyColor: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10',
-    concept: 'Searches an unstructured database of N elements in O(√N) steps using amplitude amplification.',
-    speedup: 'Quadratic speedup: O(√N) vs O(N) classical',
-    circuitSnippet: '|s⟩─[ Oracle ]─[ Diffuser ]─M\n|0⟩─[ Oracle ]─[ Diffuser ]─M',
-    qubits: 4,
+    concept: 'Amplitude Amplification Search',
+    description: 'Searches an unstructured database of N elements in O(√N) evaluations using phase inversion and diffusion operators.',
+    speedup: 'Quadratic Speedup: O(√N) vs O(N)',
+    circuitSnippet: '|s⟩ ─── [ Oracle ] ─── [ Diffuser ] ─── M\n|0⟩ ─── [ Oracle ] ─── [ Diffuser ] ─── M',
   },
   {
     id: 'qft',
     name: 'Quantum Fourier Transform',
     difficulty: 'Advanced',
     difficultyColor: 'text-purple-400 border-purple-500/30 bg-purple-500/10',
-    concept: 'Transforms discrete quantum amplitudes into phase frequencies in O(n²) quantum gates.',
+    concept: 'Quantum Frequency Transformation',
+    description: 'Transforms quantum amplitude amplitudes into phase frequencies in O(n²) quantum gates, powering Phase Estimation.',
     speedup: 'Exponential over FFT: O(n²) vs O(n · 2ⁿ)',
-    circuitSnippet: '|j₁⟩─H─[R₂]─[R₃]──\n|j₂⟩───┼───H─[R₂]─\n|j₃⟩───┼───┼───H──',
-    qubits: 4,
+    circuitSnippet: '|j₁⟩ ─── H ─── [R₂] ─── [R₃] ───\n|j₂⟩ ───────── ┼ ────── H ──[R₂]─\n|j₃⟩ ───────── ┼ ────── ┼ ─── H ─',
   },
   {
     id: 'shor',
     name: "Shor's Algorithm",
     difficulty: 'Advanced',
     difficultyColor: 'text-purple-400 border-purple-500/30 bg-purple-500/10',
-    concept: 'Finds prime factors of large integers N in polynomial time using modular exponentiation and QFT.',
-    speedup: 'Exponential speedup: O((log N)³) vs sub-exponential',
-    circuitSnippet: '|0⟩ⁿ─Hⁿ─[ U_aˣ ]─[ QFT† ]─M\n|1⟩─────[ U_aˣ ]──────────',
-    qubits: 8,
+    concept: 'Prime Factorization via Period Finding',
+    description: 'Factors large composite integers N in polynomial time using modular exponentiation and QFT, demonstrating quantum computational supremacy.',
+    speedup: 'Exponential Speedup: O((log N)³)',
+    circuitSnippet: '|0⟩ⁿ ── Hⁿ ── [ U_aˣ ] ── [ QFT† ] ── M\n|1⟩  ───────── [ U_aˣ ] ───────────────',
   },
 ];
 
-const CURRICULUM_STEPS = [
+const LEARNING_JOURNEY = [
   { step: '01', title: 'Quantum Basics', desc: 'Linear algebra, complex vectors, Hilbert spaces, and qubit state representation.' },
-  { step: '02', title: 'Qubits & Superposition', desc: 'Bloch sphere geometry, Dirac bra-ket notation, and Born rule probability collapse.' },
-  { step: '03', title: 'Quantum Gates', desc: 'Unitary matrix transformations: Pauli X, Y, Z, Hadamard, phase gates, and CNOT.' },
-  { step: '04', title: 'Quantum Circuits', desc: 'Multi-qubit registers, entanglement generation, Bell states, and decoherence.' },
-  { step: '05', title: 'Quantum Algorithms', desc: 'Deutsch-Jozsa, Bernstein-Vazirani, Grover search, and phase estimation.' },
-  { step: '06', title: 'Simulation & Noise', desc: 'Density matrices, Kraus operators, T₁ relaxation, and T₂ dephasing simulation.' },
-  { step: '07', title: 'Advanced Quantum Hardware', desc: 'Superconducting transmons, cryogenic microwave controls, and quantum error mitigation.' },
+  { step: '02', title: 'Qubits', desc: 'Statevectors, Dirac bra-ket notation, and Bloch sphere coordinate geometry.' },
+  { step: '03', title: 'Superposition', desc: 'Coherent linear combinations of states, interference, and Born-rule probability amplitudes.' },
+  { step: '04', title: 'Entanglement', desc: 'EPR pairs, Bell states, non-local correlation, and Schmidt decomposition.' },
+  { step: '05', title: 'Quantum Gates', desc: 'Unitary matrix transformations: Pauli X, Y, Z, Hadamard, phase gates, CNOT, and SWAP.' },
+  { step: '06', title: 'Quantum Circuits', desc: 'Multi-qubit registers, circuit depth, gate synthesis, and waveguide mapping.' },
+  { step: '07', title: 'Quantum Measurement', desc: 'Projective measurement, density matrices, wavefunction collapse, and POVMs.' },
+  { step: '08', title: 'Quantum Algorithms', desc: 'Deutsch-Jozsa, Bernstein-Vazirani, Grover search, and phase estimation.' },
+  { step: '09', title: 'Simulation', desc: 'Noise models, decoherence (T₁, T₂), quantum trajectories, and state tomography.' },
+  { step: '10', title: 'Advanced Quantum Computing', desc: 'Fault-tolerant quantum error correction, surface codes, and NISQ hardware execution.' },
 ];
 
 export const LandingPage: React.FC = () => {
   const [store, actions] = useGameStore();
   const [active3DTab, setActive3DTab] = useState<'qubit' | 'superposition' | 'entanglement' | 'bloch'>('qubit');
-  const [selectedLabModule, setSelectedLabModule] = useState<'chip' | 'cryo' | 'electronics' | 'readout'>('chip');
+  const [selectedLabModule, setSelectedLabModule] = useState<'processor' | 'cryo' | 'electronics' | 'readout' | 'microwave'>('processor');
 
   const scrollToLab = () => {
     const el = document.getElementById('quantum-lab');
@@ -137,119 +140,109 @@ export const LandingPage: React.FC = () => {
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* 1. TOP SUBTLE SIH ANNOUNCEMENT BAR */}
-      <div className="bg-slate-900/90 text-slate-300 text-[10px] sm:text-[11px] py-1.5 px-4 text-center border-b border-slate-800/80 flex items-center justify-center gap-2 flex-wrap font-mono tracking-wider relative z-20">
-        <span className="text-cyan-400 font-bold">SMART INDIA HACKATHON 2026</span>
-        <span className="text-slate-500">•</span>
-        <span className="text-slate-300">SIH26140</span>
-        <span className="text-slate-500">•</span>
-        <span className="text-indigo-300 font-semibold">TEAM UNPAIRED ELECTRONS</span>
-      </div>
-
-      {/* 2. MAIN NAVIGATION HEADER */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between relative z-20">
-        {/* Brand */}
-        <div 
-          onClick={() => actions.setView('landing')}
-          className="flex items-center gap-3 cursor-pointer group"
-        >
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 p-0.5 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-all">
-            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-              <Atom className="w-5 h-5 text-cyan-400 group-hover:rotate-45 transition-transform duration-500" />
+      {/* 1. MINIMAL GLASS NAVIGATION BAR */}
+      <header className="sticky top-0 z-40 w-full bg-slate-950/75 border-b border-slate-800/60 backdrop-blur-xl select-none transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+          {/* Left: Brand Logo & Subtitle */}
+          <div 
+            onClick={() => actions.setView('landing')}
+            className="flex items-center gap-3 cursor-pointer group"
+          >
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 p-0.5 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-all">
+              <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                <Atom className="w-5 h-5 text-cyan-400 group-hover:rotate-45 transition-transform duration-500" />
+              </div>
             </div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-black text-2xl tracking-tight text-white">
-                QBIT
-              </span>
-              <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800/60 uppercase">
-                v2.0
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-black text-xl tracking-tight text-white">
+                  QBIT
+                </span>
+              </div>
+              <span className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase block">
+                Quantum Computing Platform
               </span>
             </div>
-            <span className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase block">
-              Quantum Learning Platform
-            </span>
           </div>
-        </div>
 
-        {/* Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1">
-          <button 
-            onClick={() => actions.setView('dashboard')}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
-          >
-            Learn
-          </button>
-          <button 
-            onClick={scrollToLab}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
-          >
-            Quantum Lab
-          </button>
-          <button 
-            onClick={() => actions.setView('playground')}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
-          >
-            Simulator
-          </button>
-          <button 
-            onClick={() => {
-              const el = document.getElementById('algorithms-section');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
-          >
-            Algorithms
-          </button>
-          <button 
-            onClick={() => actions.setTutorOpen(true)}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-cyan-300 hover:text-cyan-200 hover:bg-cyan-500/10 transition-all cursor-pointer flex items-center gap-1.5"
-          >
-            <Bot className="w-3.5 h-3.5" />
-            <span>AI Tutor</span>
-          </button>
-        </nav>
+          {/* Center: Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1">
+            <button 
+              onClick={() => actions.setView('dashboard')}
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
+            >
+              Learn
+            </button>
+            <button 
+              onClick={scrollToLab}
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
+            >
+              Quantum Lab
+            </button>
+            <button 
+              onClick={() => actions.setView('playground')}
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
+            >
+              Simulator
+            </button>
+            <button 
+              onClick={() => {
+                const el = document.getElementById('algorithms-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
+            >
+              Algorithms
+            </button>
+            <button 
+              onClick={() => actions.setTutorOpen(true)}
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-cyan-300 hover:text-cyan-200 hover:bg-cyan-500/10 transition-all cursor-pointer flex items-center gap-1.5"
+            >
+              <Bot className="w-3.5 h-3.5" />
+              <span>AI Tutor</span>
+            </button>
+          </nav>
 
-        {/* Right Auth / Access Controls */}
-        <div className="flex items-center gap-2.5">
-          {store.isAuthenticated ? (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => actions.setView(store.hasOnboarded ? 'dashboard' : 'onboarding')}
-                className="text-xs font-bold px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-black shadow-md transition-all cursor-pointer"
-              >
-                Go to Dashboard →
-              </button>
-              <button
-                onClick={() => actions.logout()}
-                className="text-xs text-slate-400 hover:text-white px-2 py-1 transition-colors"
-                title="Log Out"
-              >
-                Log Out
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => actions.openAuth('login')}
-                className="text-xs font-bold px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 border border-slate-800 hover:border-slate-600 transition-all uppercase tracking-wider cursor-pointer"
-              >
-                Log In
-              </button>
-              <button
-                onClick={() => actions.openAuth('signup')}
-                className="text-xs font-black px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 shadow-md hover:shadow-cyan-500/20 transition-all uppercase tracking-wider cursor-pointer"
-              >
-                Get Started
-              </button>
-            </div>
-          )}
+          {/* Right: Auth Controls */}
+          <div className="flex items-center gap-2.5">
+            {store.isAuthenticated ? (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => actions.setView(store.hasOnboarded ? 'dashboard' : 'onboarding')}
+                  className="text-xs font-black px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 shadow-md transition-all cursor-pointer"
+                >
+                  Dashboard →
+                </button>
+                <button
+                  onClick={() => actions.logout()}
+                  className="text-xs text-slate-400 hover:text-white px-2 py-1 transition-colors cursor-pointer"
+                  title="Log Out"
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => actions.openAuth('login')}
+                  className="text-xs font-bold px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 border border-slate-800 hover:border-slate-700 transition-all uppercase tracking-wider cursor-pointer"
+                >
+                  Log In
+                </button>
+                <button
+                  onClick={() => actions.openAuth('signup')}
+                  className="text-xs font-black px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 shadow-md hover:shadow-cyan-500/20 transition-all uppercase tracking-wider cursor-pointer"
+                >
+                  Get Started
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
-      {/* 3. HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-20 relative z-10">
+      {/* 2. HERO SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Hero Content */}
           <motion.div 
@@ -261,10 +254,10 @@ export const LandingPage: React.FC = () => {
             {/* Scientific Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-700/80 text-cyan-300 text-xs font-mono font-semibold shadow-inner">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              <span>Next-Gen Quantum Computing Education</span>
+              <span>Autonomous Quantum Education Platform</span>
             </div>
 
-            {/* Powerful Typography Headline */}
+            {/* Powerful Typography Headline with Subtle Gradient */}
             <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-[1.08]">
               Learn Quantum Computing.{' '}
               <span className="block bg-gradient-to-r from-cyan-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
@@ -272,13 +265,12 @@ export const LandingPage: React.FC = () => {
               </span>
             </h1>
 
-            {/* Supporting Copy */}
+            {/* Supporting Statement */}
             <p className="text-base text-slate-300 max-w-xl leading-relaxed">
-              An interactive AI-powered platform for learning quantum computing, building quantum circuits, 
-              running simulations, and exploring the future of quantum technology.
+              An interactive AI-powered platform where you can learn quantum concepts, build circuits, run simulations, and understand quantum algorithms visually.
             </p>
 
-            {/* Primary & Secondary CTAs */}
+            {/* Three Primary CTAs (No login buttons inside hero) */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 pt-2">
               <button
                 onClick={() => actions.setView(store.hasOnboarded ? 'dashboard' : 'onboarding')}
@@ -293,7 +285,7 @@ export const LandingPage: React.FC = () => {
                 className="px-7 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-100 font-extrabold text-sm uppercase tracking-wider border border-slate-700 hover:border-slate-500 shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
                 <Compass className="w-4 h-4 text-cyan-400" />
-                <span>EXPLORE 3D LAB</span>
+                <span>EXPLORE QUANTUM LAB</span>
               </button>
 
               <button
@@ -301,11 +293,11 @@ export const LandingPage: React.FC = () => {
                 className="px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-cyan-300 text-xs font-bold border border-cyan-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
                 <Cpu className="w-4 h-4 text-cyan-400" />
-                <span>OPEN QUANTUM SIMULATOR</span>
+                <span>OPEN SIMULATOR</span>
               </button>
             </div>
 
-            {/* Hardware Specifications Strip */}
+            {/* Physical Telemetry Overview */}
             <div className="pt-6 grid grid-cols-3 gap-4 border-t border-slate-800/80 text-left font-mono">
               <div>
                 <div className="text-cyan-400 font-black text-xl">15.2 mK</div>
@@ -322,7 +314,7 @@ export const LandingPage: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Right Hero Visual: HIGH-END PHOTOREALISTIC 3D QUANTUM COMPUTER */}
+          {/* Right Hero Visual: HIGH-END REALISTIC 3D QUANTUM COMPUTER WITH HUD */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -334,11 +326,11 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. PRODUCT FEATURE SECTION */}
+      {/* 3. PRODUCT FEATURES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20 border-t border-slate-800/80 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider">
-            Comprehensive Learning Ecosystem
+            Architecture
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
             Everything You Need to Understand Quantum Computing
@@ -363,8 +355,7 @@ export const LandingPage: React.FC = () => {
                 LEARN
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Interactive micro-lessons breaking down complex linear algebra, state vectors, superposition, 
-                and measurement collapse without mathematical intimidation.
+                Interactive lessons explaining quantum concepts step by step. Demystify linear algebra, state vectors, superposition, and quantum interference.
               </p>
             </div>
             <button
@@ -389,8 +380,7 @@ export const LandingPage: React.FC = () => {
                 BUILD
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Drag-and-drop quantum circuit builder with Hadamard, Pauli gates, phase rotations, 
-                and multi-qubit CNOT entanglement channels.
+                Create quantum circuits using an intuitive visual circuit builder. Compose single-qubit gates and multi-qubit CNOT entanglement channels on an optical waveguide timeline.
               </p>
             </div>
             <button
@@ -415,8 +405,7 @@ export const LandingPage: React.FC = () => {
                 SIMULATE
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Execute circuits in real-time, inspect unitary matrices, calculate probability distributions, 
-                and visualize states on a 3D glass Bloch sphere.
+                Run circuits and visualize quantum states and measurement results. Inspect exact statevector amplitudes, unitary matrices, and 3D Bloch sphere projections.
               </p>
             </div>
             <button
@@ -441,8 +430,7 @@ export const LandingPage: React.FC = () => {
                 ASK QBIT AI
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Your personal AI quantum tutor for step-by-step guidance, circuit debugging, 
-                Dirac notation explanation, and Qiskit code assistance.
+                Get explanations, examples, debugging help, and guided learning from your AI quantum tutor. Master Dirac mathematics and circuit optimization interactively.
               </p>
             </div>
             <button
@@ -456,28 +444,29 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. QUANTUM LAB SECTION */}
+      {/* 4. QUANTUM LAB SECTION */}
       <section id="quantum-lab" className="max-w-7xl mx-auto px-4 sm:px-6 py-20 border-t border-slate-800/80 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider">
             Scientific Deep-Dive
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Step Inside the Quantum Lab
+            Explore the Quantum Lab
           </h2>
           <p className="text-sm text-slate-400 max-w-xl mx-auto">
-            Examine the engineering layers of a real dilution refrigerator operating at 15 millikelvin. 
-            Click any hardware subsystem to inspect its physical parameters and quantum mechanics role.
+            Inspect the physical subsystems of a real superconducting quantum computing environment. 
+            Click any subsystem to study its thermodynamic architecture and signal routing.
           </p>
         </div>
 
-        {/* 4 Hotspot Navigation Tabs */}
+        {/* 5 Hotspot Navigation Tabs */}
         <div className="flex items-center justify-center gap-2 mb-8 flex-wrap">
           {[
-            { id: 'chip', label: 'Qubit Chip', icon: <Cpu className="w-4 h-4" /> },
+            { id: 'processor', label: 'Quantum Processor', icon: <Cpu className="w-4 h-4" /> },
             { id: 'cryo', label: 'Cryogenic System', icon: <Activity className="w-4 h-4" /> },
             { id: 'electronics', label: 'Control Electronics', icon: <Sliders className="w-4 h-4" /> },
             { id: 'readout', label: 'Readout System', icon: <Compass className="w-4 h-4" /> },
+            { id: 'microwave', label: 'Microwave Lines', icon: <Zap className="w-4 h-4" /> },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -497,14 +486,14 @@ export const LandingPage: React.FC = () => {
         {/* Lab Module Details Showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-800/80 backdrop-blur-xl">
           <div className="lg:col-span-5 space-y-4">
-            {selectedLabModule === 'chip' && (
+            {selectedLabModule === 'processor' && (
               <>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold">
                   Core Processor Subsystem
                 </span>
                 <h3 className="text-2xl font-black text-white">Superconducting Transmon Chip</h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  The processor is engineered with superconducting transmon circuits patterned on high-resistivity silicon. 
+                  Superconducting transmon circuits patterned on high-resistivity silicon. 
                   Josephson junctions act as non-linear inductors, isolating the ground |0⟩ and excited |1⟩ states from higher energy levels.
                 </p>
                 <div className="grid grid-cols-2 gap-3 pt-2 font-mono text-[11px]">
@@ -527,8 +516,8 @@ export const LandingPage: React.FC = () => {
                 </span>
                 <h3 className="text-2xl font-black text-white">Closed-Cycle Dilution Refrigerator</h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Superconductivity and quantum coherence require an environment colder than deep outer space. 
-                  By circulating helium-3 and helium-4 across a phase boundary, the mixing chamber achieves a baseline of 15 millikelvin.
+                  Superconductivity and quantum coherence require an environment colder than deep space. 
+                  Circulating helium-3 and helium-4 across a phase boundary at the mixing chamber achieves an operating temperature of 15.2 millikelvin.
                 </p>
                 <div className="grid grid-cols-2 gap-3 pt-2 font-mono text-[11px]">
                   <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
@@ -548,10 +537,10 @@ export const LandingPage: React.FC = () => {
                 <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold">
                   Control Instrumentation
                 </span>
-                <h3 className="text-2xl font-black text-white">Microwave Pulse Control Lines</h3>
+                <h3 className="text-2xl font-black text-white">Microwave Control Electronics</h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   Room-temperature arbitrary waveform generators (AWGs) synthesize Gaussian microwave pulses at 4–8 GHz. 
-                  These travel down thermalized coaxial cables with -60 dB attenuation to drive single-qubit Rabi oscillations.
+                  These drive single-qubit Rabi oscillations and multi-qubit cross-resonance gates.
                 </p>
                 <div className="grid grid-cols-2 gap-3 pt-2 font-mono text-[11px]">
                   <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
@@ -571,7 +560,7 @@ export const LandingPage: React.FC = () => {
                 <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold">
                   Quantum Measurement Chain
                 </span>
-                <h3 className="text-2xl font-black text-white">Dispersive Cavity Readout</h3>
+                <h3 className="text-2xl font-black text-white">Dispersive Readout System</h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   Each qubit is capacitively coupled to an optical readout resonator. Measuring transmitted microwave tone phase 
                   identifies whether the qubit is in |0⟩ or |1⟩ without destroying the state non-demolition (QND).
@@ -584,6 +573,29 @@ export const LandingPage: React.FC = () => {
                   <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
                     <span className="text-slate-400 block text-[10px]">READOUT FIDELITY:</span>
                     <strong className="text-white">98.7%</strong>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {selectedLabModule === 'microwave' && (
+              <>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold">
+                  Transmission Lines
+                </span>
+                <h3 className="text-2xl font-black text-white">Semi-Rigid Microwave Lines</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  High-purity stainless steel and niobium semi-rigid coaxial cables routed through thermalized attenuator stages 
+                  (-10 dB at 4K, -20 dB at 100mK, -30 dB at 15mK) prevent 300K thermal photons from saturating the processor.
+                </p>
+                <div className="grid grid-cols-2 gap-3 pt-2 font-mono text-[11px]">
+                  <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                    <span className="text-slate-400 block text-[10px]">TOTAL ATTENUATION:</span>
+                    <strong className="text-cyan-300">-60 dB</strong>
+                  </div>
+                  <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                    <span className="text-slate-400 block text-[10px]">CABLE IMPEDANCE:</span>
+                    <strong className="text-white">50 Ω</strong>
                   </div>
                 </div>
               </>
@@ -637,7 +649,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. QUANTUM CIRCUIT BUILDER SECTION */}
+      {/* 5. QUANTUM CIRCUIT BUILDER SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20 border-t border-slate-800/80 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-5 space-y-5">
@@ -645,25 +657,28 @@ export const LandingPage: React.FC = () => {
               Visual Quantum IDE
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              Compose & Simulate Quantum Circuits
+              Quantum Circuit Builder
             </h2>
             <p className="text-sm text-slate-300 leading-relaxed">
               Design multi-qubit quantum algorithms on an optical waveguide timeline. Apply single-qubit 
-              rotations and multi-qubit entanglement gates, then watch real-time state vector transformations.
+              rotations and multi-qubit entanglement gates, then observe phase and state transformations in real time.
             </p>
 
-            {/* Gate Palette Showcase */}
+            {/* Gate Palette Showcase: H, X, Y, Z, S, T, CNOT, SWAP, MEASURE */}
             <div className="space-y-2">
               <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
-                Supported Gate Palette:
+                Available Quantum Gates:
               </span>
-              <div className="grid grid-cols-6 gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                 {[
                   { sym: 'H', name: 'Hadamard', col: 'text-cyan-400 border-cyan-500/40 bg-cyan-500/10' },
                   { sym: 'X', name: 'Pauli-X', col: 'text-rose-400 border-rose-500/40 bg-rose-500/10' },
                   { sym: 'Y', name: 'Pauli-Y', col: 'text-amber-400 border-amber-500/40 bg-amber-500/10' },
                   { sym: 'Z', name: 'Pauli-Z', col: 'text-indigo-400 border-indigo-500/40 bg-indigo-500/10' },
-                  { sym: 'CX', name: 'CNOT', col: 'text-purple-400 border-purple-500/40 bg-purple-500/10' },
+                  { sym: 'S', name: 'Phase (π/2)', col: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10' },
+                  { sym: 'T', name: 'π/8 Gate', col: 'text-pink-400 border-pink-500/40 bg-pink-500/10' },
+                  { sym: 'CNOT', name: 'Control-NOT', col: 'text-purple-400 border-purple-500/40 bg-purple-500/10' },
+                  { sym: 'SWAP', name: 'Qubit Swap', col: 'text-blue-400 border-blue-500/40 bg-blue-500/10' },
                   { sym: 'M', name: 'Measure', col: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10' },
                 ].map((g) => (
                   <div 
@@ -683,13 +698,13 @@ export const LandingPage: React.FC = () => {
                 onClick={() => actions.setView('playground')}
                 className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/20 flex items-center gap-2 cursor-pointer transition-all"
               >
-                <span>BUILD YOUR FIRST CIRCUIT</span>
+                <span>OPEN VISUAL CIRCUIT BUILDER</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          {/* IDE Schematic Preview */}
+          {/* IDE Schematic Preview: Bell State Circuit */}
           <div className="lg:col-span-7 bg-slate-900/90 rounded-3xl border border-slate-800 p-6 shadow-2xl backdrop-blur-xl space-y-4 font-mono">
             {/* Window Header */}
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -697,7 +712,7 @@ export const LandingPage: React.FC = () => {
                 <span className="w-3 h-3 rounded-full bg-rose-500/80" />
                 <span className="w-3 h-3 rounded-full bg-amber-500/80" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                <span className="text-xs text-slate-400 ml-2 font-bold">bell_state_circuit.qbit</span>
+                <span className="text-xs text-slate-400 ml-2 font-bold">quantum_circuit.py</span>
               </div>
               <span className="text-[10px] text-cyan-400 px-2 py-0.5 rounded bg-cyan-950 border border-cyan-800">
                 STATE: |Φ⁺⟩ = (|00⟩ + |11⟩)/√2
@@ -708,7 +723,7 @@ export const LandingPage: React.FC = () => {
             <div className="p-6 bg-slate-950 rounded-2xl border border-slate-800/80 space-y-8 select-none">
               {/* Qubit 0 Line */}
               <div className="flex items-center gap-3">
-                <span className="text-xs text-cyan-300 font-bold w-12 shrink-0">q[0] |0⟩</span>
+                <span className="text-xs text-cyan-300 font-bold w-12 shrink-0">|0⟩</span>
                 <div className="flex-1 flex items-center relative">
                   <div className="absolute inset-x-0 h-0.5 bg-cyan-500/40" />
                   <div className="flex items-center justify-around w-full relative z-10">
@@ -730,13 +745,13 @@ export const LandingPage: React.FC = () => {
 
               {/* Qubit 1 Line */}
               <div className="flex items-center gap-3">
-                <span className="text-xs text-cyan-300 font-bold w-12 shrink-0">q[1] |0⟩</span>
+                <span className="text-xs text-cyan-300 font-bold w-12 shrink-0">|0⟩</span>
                 <div className="flex-1 flex items-center relative">
                   <div className="absolute inset-x-0 h-0.5 bg-cyan-500/40" />
                   <div className="flex items-center justify-around w-full relative z-10">
                     <span className="text-slate-600 text-xs">—</span>
                     <span className="w-6 h-6 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center shadow-md">
-                      ⊕
+                      X
                     </span>
                     <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs font-bold">
                       M
@@ -758,6 +773,107 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 6. QUANTUM SIMULATOR SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20 border-t border-slate-800/80 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider">
+            Execution Engine
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Scientific Quantum Simulator
+          </h2>
+          <p className="text-sm text-slate-400 max-w-xl mx-auto">
+            Simulate statevector evolutions, inspect density matrices, compute entanglement entropies, 
+            and observe measurement outcome distributions across 1024 shots.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Tile 1: Statevector Representation */}
+          <div className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">
+            <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase">
+              <Waves className="w-4 h-4" />
+              <span>State Vector & Dirac Notation</span>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Real-time complex amplitude evaluation:
+            </p>
+            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800/80 font-mono text-xs text-cyan-300 space-y-2">
+              <div>|ψ⟩ = 0.7071 |00⟩ + 0.0000 |01⟩</div>
+              <div className="pl-6">+ 0.0000 |10⟩ + 0.7071 |11⟩</div>
+              <div className="pt-2 border-t border-slate-800 text-[10px] text-slate-500">
+                Purity Tr(ρ²) = 1.00 • Entropy S = 0.00
+              </div>
+            </div>
+          </div>
+
+          {/* Tile 2: Bloch Sphere Coordinates */}
+          <div className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">
+            <div className="flex items-center gap-2 text-purple-400 font-mono text-xs font-bold uppercase">
+              <Orbit className="w-4 h-4" />
+              <span>Bloch Coordinates (θ, ϕ)</span>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Geometric projection of individual qubit states:
+            </p>
+            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800/80 font-mono text-xs space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">q[0] Polar Angle θ:</span>
+                <span className="text-purple-300 font-bold">1.5708 rad (π/2)</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">q[0] Azimuthal Angle ϕ:</span>
+                <span className="text-purple-300 font-bold">0.0000 rad</span>
+              </div>
+              <div className="pt-2 border-t border-slate-800 text-[10px] text-slate-500">
+                Vector: [x: 1.00, y: 0.00, z: 0.00]
+              </div>
+            </div>
+          </div>
+
+          {/* Tile 3: 1024-Shot Measurement Histogram */}
+          <div className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">
+            <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase">
+              <BarChart3 className="w-4 h-4" />
+              <span>1024-Shot Histogram Output</span>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Empirical sampling of collapsed computational basis states:
+            </p>
+            <div className="space-y-3 font-mono text-xs">
+              <div>
+                <div className="flex justify-between text-[11px] mb-1">
+                  <span className="text-slate-300 font-bold">|00⟩: 514 shots</span>
+                  <span className="text-emerald-400">50.2%</span>
+                </div>
+                <div className="h-2 w-full bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                  <div className="h-full bg-emerald-500 rounded-full" style={{ width: '50.2%' }} />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between text-[11px] mb-1">
+                  <span className="text-slate-300 font-bold">|11⟩: 510 shots</span>
+                  <span className="text-emerald-400">49.8%</span>
+                </div>
+                <div className="h-2 w-full bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                  <div className="h-full bg-emerald-500 rounded-full" style={{ width: '49.8%' }} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-10">
+          <button
+            onClick={() => actions.setView('playground')}
+            className="px-8 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-cyan-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
+          >
+            Launch Full Quantum Simulator →
+          </button>
         </div>
       </section>
 
@@ -794,15 +910,17 @@ export const LandingPage: React.FC = () => {
               QBIT AI offers real-time conversational breakdowns, step-by-step guidance, and Dirac notation explanations.
             </p>
 
-            {/* Core Capabilities Grid */}
+            {/* 8 Core Capabilities */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               {[
                 'Explain quantum concepts intuitively',
-                'Explain and construct quantum circuits',
+                'Explain quantum gates & matrices',
+                'Explain foundational algorithms',
+                'Analyze & optimize quantum circuits',
                 'Help debug runtime circuit errors',
                 'Generate Qiskit & Cirq code examples',
-                'Explain algorithms like Grover & Shor',
                 'Answer beginner & advanced questions',
+                'Guide students step by step',
               ].map((feat) => (
                 <div key={feat} className="flex items-center gap-2 text-slate-300 font-medium">
                   <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
@@ -880,13 +998,17 @@ export const LandingPage: React.FC = () => {
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <div className="text-xs font-bold text-cyan-300">
                   {algo.concept}
+                </div>
+
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {algo.description}
                 </p>
 
                 <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800/80 font-mono text-[10px] text-cyan-300">
                   <span className="text-slate-500 block mb-0.5 text-[9px] uppercase tracking-wider font-bold">
-                    Quantum Speedup:
+                    Quantum Advantage:
                   </span>
                   {algo.speedup}
                 </div>
@@ -899,17 +1021,16 @@ export const LandingPage: React.FC = () => {
 
               <button
                 onClick={() => actions.setView('playground')}
-                className="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer uppercase tracking-wider"
               >
-                <span>Try Algorithm in Simulator</span>
-                <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
+                <span>TRY ALGORITHM →</span>
               </button>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 9. STRUCTURED LEARNING JOURNEY */}
+      {/* 9. VISUAL LEARNING ROADMAP */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20 border-t border-slate-800/80 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider">
@@ -919,75 +1040,52 @@ export const LandingPage: React.FC = () => {
             The Quantum Learning Roadmap
           </h2>
           <p className="text-sm text-slate-400 max-w-xl mx-auto">
-            A comprehensive, structured roadmap taking you from foundational linear algebra to 
+            A comprehensive, structured educational journey from foundational linear algebra to 
             multi-qubit gate synthesis and hardware execution.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {CURRICULUM_STEPS.map((step, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          {LEARNING_JOURNEY.map((step, idx) => (
             <div
               key={step.step}
-              className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all"
+              className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all"
             >
               <div>
-                <span className="text-xs font-mono font-black text-cyan-400 block mb-2">
+                <span className="text-xs font-mono font-black text-cyan-400 block mb-1">
                   STAGE {step.step}
                 </span>
-                <h4 className="text-sm font-bold text-white mb-1.5">
+                <h4 className="text-xs font-bold text-white mb-1">
                   {step.title}
                 </h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-slate-400 leading-relaxed">
                   {step.desc}
                 </p>
               </div>
 
-              <div className="pt-4 text-[10px] font-mono text-slate-500 flex items-center justify-between">
-                <span>Milestone {idx + 1} of 7</span>
+              <div className="pt-3 text-[10px] font-mono text-slate-500 flex items-center justify-between">
+                <span>Step {idx + 1} of 10</span>
                 <span className="text-cyan-400 font-bold">✓ Ready</span>
               </div>
             </div>
           ))}
-
-          {/* Final Certification Tile */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 border border-indigo-500/40 flex flex-col justify-between">
-            <div>
-              <span className="text-xs font-mono font-black text-purple-400 block mb-2">
-                FINAL CAPSTONE
-              </span>
-              <h4 className="text-sm font-bold text-white mb-1.5">
-                Quantum Certification
-              </h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Demonstrate proficiency across circuit construction, algorithm implementation, and Dirac mathematics.
-              </p>
-            </div>
-
-            <button
-              onClick={() => actions.setView('dashboard')}
-              className="mt-4 w-full py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md cursor-pointer"
-            >
-              Begin Journey
-            </button>
-          </div>
         </div>
       </section>
 
-      {/* 10. SCIENTIFIC FOOTER */}
+      {/* 10. PRODUCT FOOTER */}
       <footer className="bg-slate-950 text-white py-14 px-4 sm:px-6 border-t border-slate-800/80 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="space-y-2">
             <div className="flex items-center justify-center md:justify-start gap-2.5">
               <span className="text-cyan-400 font-extrabold text-2xl">⚛</span>
               <span className="font-black text-xl text-white tracking-tight">QBIT</span>
-              <span className="text-xs text-slate-500 font-mono">| SIH26140</span>
             </div>
             <p className="text-xs text-slate-400 max-w-sm">
-              AI-Based Interactive Quantum Algorithm Learning Platform. 
-              Built for students, educators, and quantum researchers.
+              Independent AI-powered interactive quantum computing platform. 
+              Built for students, researchers, and quantum software engineers.
             </p>
             <p className="text-xs text-slate-500 font-medium">
-              Developed by Team <strong className="text-slate-200">UNPAIRED ELECTRONS</strong> • Smart India Hackathon 2026
+              © 2026 QBIT Platform. All rights reserved.
             </p>
           </div>
 
@@ -1002,19 +1100,19 @@ export const LandingPage: React.FC = () => {
               onClick={() => actions.setView('visualization')}
               className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all cursor-pointer"
             >
-              3D Lab
+              Quantum Lab
             </button>
             <button
               onClick={() => actions.setView('code')}
               className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all cursor-pointer"
             >
-              Qiskit Studio
+              Code Studio
             </button>
             <button
-              onClick={() => actions.setView('instructor')}
+              onClick={() => actions.setView('dashboard')}
               className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800 transition-all cursor-pointer"
             >
-              Instructor Portal
+              Curriculum
             </button>
           </div>
         </div>

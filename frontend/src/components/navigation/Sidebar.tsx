@@ -32,7 +32,7 @@ export const Sidebar: React.FC = () => {
     { id: 'practice', label: 'Practice', icon: <Target className="w-5 h-5" /> },
     { id: 'progress', label: 'Progress', icon: <TrendingUp className="w-5 h-5" /> },
     { id: 'leaderboard', label: 'Leaderboard', icon: <Trophy className="w-5 h-5" /> },
-    { id: 'instructor', label: 'Instructor', icon: <GraduationCap className="w-5 h-5" />, badge: 'SIH' },
+    { id: 'instructor', label: 'Instructor', icon: <GraduationCap className="w-5 h-5" />, badge: 'Portal' },
     { id: 'profile', label: 'Profile', icon: <User className="w-5 h-5" /> },
   ];
 

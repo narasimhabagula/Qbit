@@ -30,7 +30,7 @@ export const InstructorDashboard: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-100">
-              SIH26140 Instructor Portal
+              Academic & Research Portal
             </span>
             <span className="text-xs text-slate-500">Cohort: Quantum Information batch 2026</span>
           </div>
