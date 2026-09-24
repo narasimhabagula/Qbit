@@ -421,7 +421,16 @@ export const LandingPage: React.FC = () => {
           <div className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-cyan-400/40 transition-all group flex flex-col justify-between">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-2xl font-black font-mono text-cyan-300">04</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-2xl font-black font-mono text-cyan-300">04</span>
+                  <div className="w-8 h-8 rounded-full overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 to-purple-500 shadow-sm ring-1 ring-cyan-400/40 bg-slate-950">
+                    <img 
+                      src="/qbit-ai-mascot.jpg" 
+                      alt="QBIT AI Mascot" 
+                      className="w-full h-full object-cover rounded-full" 
+                    />
+                  </div>
+                </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
                   AI TUTOR
                 </span>
@@ -880,14 +889,32 @@ export const LandingPage: React.FC = () => {
       {/* 7. AI TUTOR — QBIT AI SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20 border-t border-slate-800/80 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* AI 3D Mascot Preview */}
+          {/* AI Mascot Reference Image 1 Showcase */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            <QBitMascot3D state="thinking" size={260} />
-            <div className="mt-4 text-center">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-mono font-bold">
-                <Bot className="w-3.5 h-3.5" />
-                <span>QBIT AI • Quantum Tutor Model</span>
+            <div 
+              className="relative group cursor-pointer"
+              onClick={() => actions.setTutorOpen(true)}
+              title="Click to interact with QBIT AI"
+            >
+              {/* Subtle Cyan/Purple Glow Aura */}
+              <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 opacity-60 blur-xl group-hover:opacity-90 group-hover:blur-2xl transition-all duration-500 animate-pulse" />
+              
+              {/* Mascot Container */}
+              <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden p-1 bg-gradient-to-tr from-cyan-400 via-indigo-500 to-purple-600 shadow-2xl ring-4 ring-cyan-400/40 group-hover:scale-105 group-hover:ring-cyan-300 transition-all duration-500 bg-slate-950">
+                <img 
+                  src="/qbit-ai-mascot.jpg" 
+                  alt="QBIT AI Robot Mascot" 
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </div>
+            </div>
+
+            <div className="mt-5 text-center space-y-1">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-xs font-mono font-bold">
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                <span>QBIT AI • Your Quantum Learning Assistant</span>
               </span>
+              <p className="text-[11px] text-slate-400 font-mono">Click mascot or button to start learning session</p>
             </div>
           </div>
 
@@ -957,9 +984,11 @@ export const LandingPage: React.FC = () => {
             <div className="pt-2">
               <button
                 onClick={() => actions.setTutorOpen(true)}
-                className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/20 flex items-center gap-2 cursor-pointer transition-all"
+                className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/20 flex items-center gap-2.5 cursor-pointer transition-all group"
               >
-                <Bot className="w-4 h-4" />
+                <div className="w-5 h-5 rounded-full overflow-hidden p-0.5 bg-black ring-1 ring-slate-950 shrink-0">
+                  <img src="/qbit-ai-mascot.jpg" alt="QBIT AI" className="w-full h-full object-cover rounded-full" />
+                </div>
                 <span>OPEN QBIT AI TUTOR</span>
               </button>
             </div>
@@ -1076,9 +1105,18 @@ export const LandingPage: React.FC = () => {
       <footer className="bg-slate-950 text-white py-14 px-4 sm:px-6 border-t border-slate-800/80 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="space-y-2">
-            <div className="flex items-center justify-center md:justify-start gap-2.5">
-              <span className="text-cyan-400 font-extrabold text-2xl">⚛</span>
-              <span className="font-black text-xl text-white tracking-tight">QBIT</span>
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="w-12 h-12 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 via-indigo-500 to-purple-600 shadow-md shadow-cyan-500/20 ring-1 ring-cyan-400/40 bg-black shrink-0">
+                <img 
+                  src="/qbit-platform-logo.jpg" 
+                  alt="QBIT Platform Logo" 
+                  className="w-full h-full object-cover object-top rounded-[10px]"
+                />
+              </div>
+              <div className="text-left">
+                <span className="font-black text-xl text-white tracking-tight block">QBIT</span>
+                <span className="text-[10px] text-cyan-300/80 font-mono tracking-wider uppercase block">Quantum Computing Platform</span>
+              </div>
             </div>
             <p className="text-xs text-slate-400 max-w-sm">
               Independent AI-powered interactive quantum computing platform. 

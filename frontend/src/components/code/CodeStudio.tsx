@@ -349,8 +349,8 @@ print(qc.draw())`;
                 className="bg-white rounded-3xl border border-indigo-100 p-5 shadow-md space-y-3"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center">
-                    <Bot className="w-4 h-4 text-cyan-300" />
+                  <div className="w-8 h-8 rounded-full overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 to-purple-500 shadow-sm ring-1 ring-cyan-400/40 bg-slate-950 shrink-0">
+                    <img src="/qbit-ai-mascot.jpg" alt="QBIT AI Avatar" className="w-full h-full object-cover rounded-full" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900">QBIT AI Code Analysis</h4>

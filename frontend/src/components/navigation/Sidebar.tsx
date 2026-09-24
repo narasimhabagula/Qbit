@@ -83,12 +83,16 @@ export const Sidebar: React.FC = () => {
         <div className="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-cyan-500/20 blur-xl pointer-events-none" />
         
         <div className="flex items-center gap-2.5 mb-2">
-          <div className="w-8 h-8 rounded-xl bg-cyan-400/20 border border-cyan-400/30 flex items-center justify-center">
-            <Bot className="w-4 h-4 text-cyan-300" />
+          <div className="w-9 h-9 rounded-full overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 to-purple-500 shadow-md shadow-cyan-500/30 ring-1 ring-cyan-400/40 shrink-0 bg-slate-950">
+            <img 
+              src="/qbit-ai-mascot.jpg" 
+              alt="QBIT AI Avatar" 
+              className="w-full h-full object-cover rounded-full"
+            />
           </div>
           <div>
             <h4 className="text-xs font-bold text-white">QBIT AI</h4>
-            <span className="text-[10px] text-cyan-300">Quantum Tutor Ready</span>
+            <span className="text-[10px] text-cyan-300 font-mono">Your Quantum Assistant</span>
           </div>
         </div>
         <p className="text-[11px] text-slate-300 mb-3 leading-relaxed">

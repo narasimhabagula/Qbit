@@ -25,23 +25,27 @@ export const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 w-full bg-slate-950/80 border-b border-slate-800/60 backdrop-blur-xl select-none transition-all">
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3 flex items-center justify-between gap-4">
-        {/* Left: Brand Logo & Subtitle */}
+        {/* Left: Brand Logo & Subtitle (Reference Image 2 — QBIT Platform Logo) */}
         <div 
           onClick={() => actions.setView('landing')}
           className="flex items-center gap-3 cursor-pointer group"
+          title="QBIT — Quantum Computing Platform"
         >
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 p-0.5 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-all">
-            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-              <Atom className="w-5 h-5 text-cyan-400 group-hover:rotate-45 transition-transform duration-500" />
-            </div>
+          {/* QBIT Symbol Portion for Compact & Header Navigation */}
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 via-indigo-500 to-purple-600 shadow-lg shadow-cyan-500/20 ring-1 ring-cyan-400/40 group-hover:scale-105 group-hover:shadow-cyan-400/30 transition-all bg-black shrink-0">
+            <img 
+              src="/qbit-platform-logo.jpg" 
+              alt="QBIT Logo" 
+              className="w-full h-full object-cover object-top rounded-[10px]"
+            />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-black text-xl tracking-tight text-white">
+              <span className="font-black text-xl tracking-tight text-white group-hover:text-cyan-300 transition-colors">
                 QBIT
               </span>
             </div>
-            <span className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase block">
+            <span className="text-[10px] text-cyan-300/80 font-mono font-semibold tracking-wider uppercase block">
               Quantum Computing Platform
             </span>
           </div>

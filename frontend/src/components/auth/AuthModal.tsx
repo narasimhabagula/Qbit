@@ -157,16 +157,18 @@ export const AuthModal: React.FC = () => {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Top Header / Brand with Scientific Identity */}
+        {/* Top Header / Brand with Official QBIT Platform Logo (Reference Image 2) */}
         <div className="pt-8 pb-4 px-6 text-center bg-gradient-to-b from-indigo-50/70 via-white to-white">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-400 p-0.5 shadow-lg shadow-indigo-500/20 mb-3">
-            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-              <span className="text-2xl text-cyan-400 animate-pulse">⚛</span>
-            </div>
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 via-indigo-600 to-purple-600 shadow-xl shadow-cyan-500/20 mb-3 ring-2 ring-cyan-400/30 bg-black">
+            <img 
+              src="/qbit-platform-logo.jpg" 
+              alt="QBIT Quantum Computing Platform" 
+              className="w-full h-full object-cover object-top rounded-[14px]"
+            />
           </div>
 
           <h2 className="text-2xl font-black tracking-tight text-slate-900">
-            {mode === 'signup' ? 'Create your profile' : 'Log in to QBIT'}
+            {mode === 'signup' ? 'Create your QBIT Account' : 'Log in to QBIT'}
           </h2>
           <p className="text-xs text-slate-500 max-w-xs mx-auto mt-1 leading-relaxed">
             {mode === 'signup' 
