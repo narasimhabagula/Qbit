@@ -27,6 +27,7 @@ export interface GameState {
   lives: number;
   maxLives: number;
   completedLessons: string[];
+  completedChallenges: string[];
   activeLessonId: string | null;
   dailyGoalCurrent: number;
   dailyGoalTarget: number;
@@ -58,6 +59,7 @@ const DEFAULT_STATE: GameState = {
   lives: 5,
   maxLives: 5,
   completedLessons: ['classical-bits', 'what-is-a-qubit'],
+  completedChallenges: [],
   activeLessonId: null,
   dailyGoalCurrent: 3,
   dailyGoalTarget: 5,
@@ -198,6 +200,28 @@ export const gameStore = {
       level: newLevel,
       dailyGoalCurrent: newDaily,
       badges: updatedBadges,
+    };
+
+    if (state.soundEnabled) {
+      sounds.playCorrect();
+    }
+    notify();
+  },
+
+  completeChallenge(challengeId: string, xpReward: number = 30) {
+    const prevChallenges = state.completedChallenges || [];
+    const alreadyDone = prevChallenges.includes(challengeId);
+    const completed = alreadyDone ? prevChallenges : [...prevChallenges, challengeId];
+    const newXP = state.xp + (alreadyDone ? Math.round(xpReward * 0.2) : xpReward);
+    const newLevel = Math.min(8, Math.floor(newXP / 350) + 1);
+    const newDaily = Math.min(state.dailyGoalTarget, state.dailyGoalCurrent + 1);
+
+    state = {
+      ...state,
+      completedChallenges: completed,
+      xp: newXP,
+      level: newLevel,
+      dailyGoalCurrent: newDaily,
     };
 
     if (state.soundEnabled) {
